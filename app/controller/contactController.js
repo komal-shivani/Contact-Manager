@@ -11,6 +11,7 @@ router.get('/', authenticateUser,(req,res)=>{
     })
     .sort({createdAt:-1})
     .then((contacts)=>{
+        console.log("after sort")
         res.json(contacts)
     })
     .catch((err)=>{

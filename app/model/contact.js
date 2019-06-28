@@ -15,7 +15,12 @@ const ContactSchema=new Schema({
     },
     number:{
         type:String
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     }
+
 })
 
 const Contact=mongoose.model('Contact',ContactSchema)

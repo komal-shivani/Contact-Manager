@@ -7,6 +7,7 @@ const mongoose = require('./config/database')
 const router=require('./app/controller/contactController')
 const {usersRouter}=require('./app/controller/userController')
 
+console.log("inside index")
 app.use(express.json())
 app.use(cors())
 app.use('/contacts',router) 

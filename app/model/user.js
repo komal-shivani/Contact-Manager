@@ -100,6 +100,7 @@ UserShema.statics.findByToken=function(token){
     catch(err){
         return Promise.reject(err)
     }
+    console.log(tokenData)
     return User.findOne({
         _id:tokenData._id,
         'tokens.token':token
