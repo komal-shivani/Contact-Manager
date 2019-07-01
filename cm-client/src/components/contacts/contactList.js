@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {removeContact, addContact, setContact} from '../../action/a-contacts'
+import {removeContact} from '../../action/a-contacts'
 
 
 class ContactList extends React.Component{
@@ -10,18 +10,6 @@ class ContactList extends React.Component{
         super()
        
     }
-    // componentDidMount(){
-    //     axios.get(`http://localhost:3005/contacts`,{
-    //         headers:{
-    //             'x-auth':localStorage.getItem('userAuthToken')
-    //         }
-    //     })
-    //     .then(response=>{
-    //         console.log(response.data)
-          
-    //     })
-        
-    // }
     
    handleRemove=(contact)=>{
         console.log(contact)
@@ -35,13 +23,6 @@ class ContactList extends React.Component{
             .then(response=>{
                 this.props.dispatch(removeContact(response.data))
             })
-            // .then(()=>{
-            //     this.setState((prevState)=>({
-            //         contacts:prevState.contacts.filter(contactItem=>{
-            //             return contactItem._id!==contact._id
-            //         })
-            //     }))
-            // })
         }
     }
     render(){
@@ -51,7 +32,7 @@ class ContactList extends React.Component{
                 <ul>
                     { this.props.contacts.map((contact)=>{
                         return <li key={contact._id}>
-                        <Link to={`/contacts/${contact._id}`}>{contact.name}<button onClick={()=>{this.handleRemove(contact)}}>Delete</button></Link>
+                            <Link to={`/contacts/${contact._id}`}>{contact.name}</Link><button onClick={()=>{this.handleRemove(contact)}}>Delete</button>
                         </li>
                     })}      
                 </ul>
