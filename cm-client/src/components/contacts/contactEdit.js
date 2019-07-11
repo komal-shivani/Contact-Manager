@@ -1,6 +1,5 @@
 import React from 'react'
-import axios from 'axios'
-
+import axios from '../../config/axios-config'
 import ContactForm from './contactForm'
 
 class ContactEdit extends React.Component{
@@ -12,7 +11,7 @@ class ContactEdit extends React.Component{
     }
     componentDidMount(){
         const id=this.props.match.params.id
-        axios.get(`http://localhost:3005/contacts/${id}`,{
+        axios.get(`/contacts/${id}`,{
             headers: {
                 'x-auth': localStorage.getItem('userAuthToken')
             }
@@ -24,7 +23,7 @@ class ContactEdit extends React.Component{
        })
     }
     handleSubmit=(formData)=>{
-        axios.put(`http://localhost:3005/contacts/${this.state.contact._id}`,formData,{
+        axios.put(`/contacts/${this.state.contact._id}`,formData,{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }

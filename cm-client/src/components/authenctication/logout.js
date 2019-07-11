@@ -1,12 +1,12 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../../config/axios-config'
 import { connect } from 'react-redux'
 import { resetUser } from '../../action/a-users';
 
 class Logout extends React.Component {
 
     componentDidMount() {
-        axios.delete('http://localhost:3005/users/logout', {
+        axios.delete('/users/logout', {
             headers: {
                 'x-auth': localStorage.getItem('userAuthToken')
             }

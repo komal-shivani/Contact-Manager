@@ -1,14 +1,10 @@
 import React from "react";
-// import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 
-class ContactShow extends React.Component {
-  constructor() {
-    super()
-  }
-
+class ContactShow extends React.Component{
+  
   render() {
     return (
       <div>

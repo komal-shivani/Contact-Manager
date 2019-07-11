@@ -1,12 +1,12 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../../config/axios-config'
 import { connect } from 'react-redux'
 import { setUser } from '../../action/a-users'
 
 class Account extends React.Component {
 
     componentDidMount() {
-        axios.get('http://localhost:3005/users/account', {
+        axios.get('/users/account', {
             headers: {
                 'x-auth': localStorage.getItem('userAuthToken')
             }

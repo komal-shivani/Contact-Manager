@@ -1,31 +1,22 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../../config/axios-config'
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup'
+
+const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+        .email('Invalid email')
+        .required('Field Required'),
+    password: Yup.string()
+        .min(6, 'Too short!')
+        .max(12, 'Too long!')
+        .required('Field Required'),
+
+});
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
-
-    handleChange = (e) => {
-        e.persist()
-        this.setState(() => ({
-            [e.target.name]: e.target.value
-        }))
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const formData = {
-
-            email: this.state.email,
-            password: this.state.password
-        }
-        //console.log(formData)
-        axios.post('http://localhost:3005/users/login', formData)
+    handleSubmit = (formData) => {
+        axios.post('/users/login', formData)
             .then(response => {
                 console.log(response.data)
                 if (response.data.errors) {
@@ -38,30 +29,34 @@ class Login extends React.Component {
             })
     }
 
-
-
     render() {
         return (
             <div>
                 <h2>Login</h2>
+                <Formik
+                    initialValues={{
+                        email: "",
+                        password: ""
+                    }}
+                    validationSchema={LoginSchema}
+                    onSubmit={this.handleSubmit}>
+                    {({ errors, touched }) => (
+                        <Form>
+                            <label>
+                                Email
+                            <Field type="text" placeholder="Enter your Email" name="email" />
+                                {errors.email && touched.email ? (<div>{errors.email}</div>) : null}
+                            </label><br /><br />
 
-                <form onSubmit={this.handleSubmit}>
-
-
-                    <label>
-                        Email
-                            <input type="text" value={this.state.email} name="email" onChange={this.handleChange} />
-                    </label><br /><br />
-
-                    <label>
-                        Password
-                            <input type="password" value={this.state.password} name="password" onChange={this.handleChange} />
-                    </label><br /><br />
-                    <input type="submit" />
-
-
-                </form>
-
+                            <label>
+                                Password
+                            <Field type="password" name="password" placeholder="*********" />
+                                {errors.password && touched.password ? (<div>{errors.password}</div>) : null}
+                            </label><br /><br />
+                            <button type="submit">submit</button>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         )
     }

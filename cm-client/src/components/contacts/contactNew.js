@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from '../../config/axios-config'
 import { Link } from "react-router-dom";
 import ContactForm from "./contactForm";
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ class ContactNew extends React.Component {
   handleSubmit(formData) {
     console.log(formData);
     axios
-      .post(`http://localhost:3005/contacts`, formData, {
+      .post(`/contacts`, formData, {
         headers: {
           "x-auth": localStorage.getItem("userAuthToken")
         }
@@ -25,7 +25,7 @@ class ContactNew extends React.Component {
         if (response.data.hasOwnProperty("errors")) {
           console.log(response.data.errors);
         } else {
-          this.props.history.push(`/contacts/${response.data._id}`);
+          this.props.history.push(`/contacts`);
         }
       });
   }
@@ -33,9 +33,9 @@ class ContactNew extends React.Component {
     return (
       <div>
         <ContactForm handleSubmit={this.handleSubmit} />
-        <br />
+        <br/>
 
-        <Link to="/contacts">Back</Link>
+        {/* <Link to="/contacts">Back</Link> */}
       </div>
     );
   }

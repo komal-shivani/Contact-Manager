@@ -16,26 +16,30 @@ class App extends React.Component{
     render(){
         return(
             <BrowserRouter>
-            <div>
-                <h2>
-                    {this.props.msg}
-                </h2>
-                <ul>
+                <div>
+                    <h1>Contact Manager</h1>
+                    <div >
+                        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                            <ul class="nav justify-content-end">
                     { _.isEmpty(this.props.user)?(
-                        <div>
-                            <li><Link to="/users/register">Register</Link></li>
-                            <li><Link to="/users/login">Login</Link></li>
+                                    <div>
+                            <li class="nav-item"><Link to="/users/register">Register</Link></li>
+                            <li class="nav-item"><Link to="/users/login">Login</Link></li>
                         </div>
                     
                     ):(
                         <div>
-                            <li><Link to="/users/account">Account</Link></li>
-                            <li><Link to="/users/logout">Logout</Link></li>
-                            <li><Link to='/contacts'>contacts</Link></li>
+                            <li class="nav-item"><Link to="/users/account">Account</Link></li>
+                            <li class="nav-item"><Link to="/users/logout">Logout</Link></li>
+                            <li class="nav-item"><Link to='/contacts'>contacts</Link></li>
                         </div>
                     )}
                       
                 </ul>
+                        </nav>
+                </div>
+                
+                 
 
                     <Switch>
                         <Route path="/users/account" component={Account} exact/>
@@ -47,6 +51,7 @@ class App extends React.Component{
                         <Route path='/contacts/edit/:id' component={ContactEdit} exact />
                         <Route path='/contacts/:id' component={ContactShow} exact/>
                     </Switch>
+                   
             </div>
             </BrowserRouter>
         )
@@ -55,8 +60,7 @@ class App extends React.Component{
 
 const mapStateToProps=(state)=>{
     return{
-        user:state.user,
-        msg:'Contact Manager'
+        user:state.user
     } 
 }
 

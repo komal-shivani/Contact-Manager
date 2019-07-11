@@ -1,21 +1,15 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../../config/axios-config'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {removeContact} from '../../action/a-contacts'
 
-
-class ContactList extends React.Component{
-    constructor(){
-        super()
-       
-    }
-    
+class ContactList extends React.Component{  
    handleRemove=(contact)=>{
         console.log(contact)
         const confirmRemove=window.confirm('Are You Sure?')
         if(confirmRemove){
-            axios.delete(`http://localhost:3005/contacts/${contact._id}`,{
+            axios.delete(`/contacts/${contact._id}`,{
                 headers: {
                     'x-auth':localStorage.getItem('userAuthToken')
                 }
@@ -37,9 +31,6 @@ class ContactList extends React.Component{
                     })}      
                 </ul>
                 <Link to="/contacts/new">Add contacts</Link> 
-
-               
-
             </div>
         )
     }
@@ -51,4 +42,4 @@ const mapStateToProps=(state)=>{
         contacts:state.contacts
     }
 }
-export default connect(mapStateToProps)(ContactList) 
+export default connect(mapStateToProps)(ContactList)

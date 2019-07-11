@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import axios from "axios";
-import { Provider } from "react-redux";
+import 'antd/dist/antd.css';
 
+import { Provider } from "react-redux";
 import { setUser } from "./action/a-users";
 import { setContact } from "./action/a-contacts";
 
